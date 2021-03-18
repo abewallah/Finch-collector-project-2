@@ -1,0 +1,185 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1 class="titleFonts">Card Details</h1>
+<div class="row">
+  <div class="col s5">
+    <div class="card blue-grey">
+      <div class="card-content white-text">
+        <span class="card-title">{{ deck.name }}</span>
+        <p>Description: {{ deck.description }}</p>
+
+        <br />
+
+        <form action="{% url 'delete_deck' deck.id %}" method="POST">
+          {% csrf_token %}
+          <button class="btn-floating btn-medium pulse">
+            <i class="material-icons">clear</i>
+          </button>
+        </form>
+
+        <br />
+
+        <a
+          href="{% url 'update_deck' deck.id %}"
+          class="btn-floating btn-medium cyan pulse"
+        >
+          <i class="material-icons">border_color</i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col s5">
+    <form action="{% url 'add_rating' deck.id %}" method="POST">
+      {% csrf_token %} {{ rating_form.as_p }}
+      <input type="submit" value="Rate Deck" class="btn" />
+    </form>
+
+    <table class="stripped">
+      <thead>
+        <tr>
+          <th>Date:</th>
+          <th>Class Grade:</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for rating in deck.rating_set.all %}
+        <tr>
+          <td>{{ rating.date }}</td>
+          <td>{{ rating.get_grade_display }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row small">
+  <div class="col s6">
+    <h4 class="titleFonts">{{ deck.name }} Deck</h4>
+    {% if deck.cards.count %} {% for card in deck.cards.all %}
+    <div class="card blue-grey">
+      <div class="card-content">
+        <div class="card-title">
+          <p>{{ card.name}}</p>
+        </div>
+
+        <p>attributes: {{ card.attributes }}</p>
+        <p>type: {{ card.types }}</p>
+        <p>Description: {{ card.description }}</p>
+        <p>ATK: {{ card.atk}}</p>
+        <p>DEF: {{ card.defense}}</p>
+        <a
+          href="{% url 'remove_card' deck.id card.id %}"
+          class="btn-floating pulse"
+          ><i class="material-icons">remove</i></a
+        >
+      </div>
+    </div>
+    {% endfor%} {% else %}
+
+    <h5>Add Cards To Deck</h5>
+
+    {% endif%}
+  </div>
+  {% load static%}
+
+  <div class="col s6">
+    <h5 class="titleFonts">Cards</h5>
+    {% if cards.count %} {% for card in cards.all %}
+    <div class="card green">
+      <div class="card-content">
+        <div class="card-title">
+          <p>{{ card.name }}</p>
+        </div>
+
+        <p>attributes: {{ card.attributes }}</p>
+        <p>type: {{ card.types }}</p>
+        <p>Description: {{ card.description }}</p>
+        <p>ATK: {{ card.atk}}</p>
+        <p>DEF: {{ card.defense}}</p>
+      </div>
+      <div class="card-action">
+        <form action="{% url 'add_card' deck.id card.id %}" method="POST">
+          {% csrf_token %}
+          <button type="submit" class="btn-floating pulse">
+            <i class="material-icons">add</i>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    {% endfor%} {% else %}
+
+    <h5>No New Cards Available</h5>
+
+    {% endif%}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col s3">
+    <div class="card">
+      <div class="card-content">
+        <img
+          class="materialboxed"
+          width="150"
+          src="https://images-na.ssl-images-amazon.com/images/I/61rvxpicyCL._AC_SY450_.jpg"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="col s3">
+    <div class="card">
+      <div class="card-content">
+        <img
+          class="materialboxed"
+          width="150"
+          src="https://static.wikia.nocookie.net/yugioh/images/1/10/RoseSpectreofDunn-OP05-EN-SP-UE.png/revision/latest?cb=20170807210130"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="col s3">
+    <div class="card">
+      <div class="card-content">
+        <img
+          class="materialboxed"
+          width="150"
+          src="https://images-na.ssl-images-amazon.com/images/I/717bZz1aPYL._AC_SY879_.jpg"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="col s3">
+    <div class="card">
+      <div class="card-content">
+        <img
+          class="materialboxed"
+          width="150"
+          src="https://d1rw89lz12ur5s.cloudfront.net/photo/coretcg/file/4c1400e5fa49e70b3dfa55d2bbe89e0a/large/Lord_of_D._BPT-004.gif"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const dateEl = document.getElementById('id_date');
+  M.Datepicker.init(dateEl, {
+    format: 'yyyy-mm-dd',
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true,
+  });
+
+  const selectEl = document.getElementById('id_grade');
+  M.FormSelect.init(selectEl);
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const elems = document.querySelectorAll('.materialboxed');
+    M.Materialbox.init(elems);
+  });
+</script>
+{% endblock %}

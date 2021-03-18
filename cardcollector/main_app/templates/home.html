@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+
+<h3 class="titleFonts">Welcome to the Home Page</h3>
+<div class="row">
+<div class="col s4">
+
+  <ul class="collapsible">
+    <li>
+      <div class="collapsible-header collNav"><i class="material-icons">arrow_drop_down</i>Info</div>
+      <div class="collapsible-body collNav"><span>Yougioh Franrchise!!</span></div>
+    </li>
+    <li>
+      <div class="collapsible-header collNav"><i class="material-icons">arrow_drop_down</i>About</div>
+      <div class="collapsible-body collNav"><span>This site contains great information on the Yugoih Trading card franchise.</span></div>
+    </li>
+    <li>
+      <div class="collapsible-header collNav"><i class="material-icons">arrow_drop_down</i>Contact</div>
+      <div class="collapsible-body collNav"><span>Tele: 1-458-456-7896 <br/> email: yugi@gmail.com</span></div>
+    </li>
+  </ul>
+        
+
+</div>
+  <div class="carousel col s8">
+    <a class="carousel-item" href="#one!"><img src="https://i.ebayimg.com/images/g/fQEAAOSwXS5fYtou/s-l1600.jpg"></a>
+    <a class="carousel-item" href="#two!"><img src="https://tcgplayer-cdn.tcgplayer.com/product/123493_200w.jpg"></a>
+    <a class="carousel-item" href="#three!"><img src="https://www.yugiohcardguide.com/images/ct05/CT05-EN001.jpg"></a>
+    <a class="carousel-item" href="#four!"><img src="https://www.yugiohcardguide.com/images/bpt/BPT-005.jpg"></a>
+    <a class="carousel-item" href="#four!"><img src="https://www.yugiohcardguide.com/images/dr3/DR3-EN215.jpg"></a>
+    <a class="carousel-item" href="#four!"><img src="https://www.yugiohcardguide.com/images/crv/CRV-EN036.jpg"></a>
+    <a class="carousel-item" href="#five!"><img src="https://www.yugiohcardguide.com/images/bp01/BP01-EN024.jpg"></a>
+  </div>
+</div>
+  
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const elems = document.querySelectorAll('.carousel');
+    M.Carousel.init(elems);
+    const collElem = document.querySelectorAll('.collapsible');
+    M.Collapsible.init(collElem);
+  });
+</script>
+
+{% endblock %}

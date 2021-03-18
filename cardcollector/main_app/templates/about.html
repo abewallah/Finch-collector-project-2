@@ -1,0 +1,45 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    About
+{% endblock %}
+
+{% block content %}
+
+<br/>
+
+<div class="parallax-container">
+
+<div class="parallax"><img src="{% static 'assets/img1.jpg' %}" alt="Yugioh Protaganists"></div>
+</div>
+<div class="section black">
+<div class="row container">
+<h2 class="header titleFonts">Yugioh Trading Cards</h2>
+<p class="grey-text text-darken-3 lighten-3">Yu-Gi-Oh! tells the tale of Yugi Mutou, a timid young boy who loves all sorts of games, but is often bullied around. One day, he solves an ancient puzzle known as the Millennium Puzzle (千年パズル, Sennen Pazuru), causing his body to play host to a mysterious spirit with the personality of a gambler.</p>
+</div>
+</div>
+<div class="parallax-container">
+<div class="parallax"><img src="{% static 'assets/img2.png' %}" alt=""></div>
+</div>
+<div class="section white">
+<div class="row container">
+<h2 class="header">Yugioh Knowlege</h2>
+<p class="grey-text text-darken-3 lighten-3">There are over 22 billion Yu-Gi-Oh! cards in circulation but there are 14 cards, in particular, you should really know about.</p>
+</div>
+</div>
+<div class="parallax-container">
+<div class="parallax"><img src="{% static 'assets/img3.jpg' %}" alt=""></div>
+</div>
+<br />
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    const elems = document.querySelectorAll('.parallax');
+    M.Parallax.init(elems);
+  });
+  
+</script>
+
+{% endblock %}

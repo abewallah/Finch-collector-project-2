@@ -1,0 +1,70 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Collector{% block title %}{% endblock %}</title>
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </head>
+  <body>
+    <header class="navbar-fixed" id="navigatorBar">
+      <nav id="navigatorBar">
+        <div class="nav-wrapper">
+          <ul>
+            <li>
+              <a href="/" class="left brand-logo titleFonts"
+                >&nbsp;&nbsp;Yugioh Collector</a
+              >
+            </li>
+          </ul>
+
+          <a href="/" class='dropdown-trigger btn right drpNav' data-target='dropdown1'>Drop Me!</a>
+          <ul id="dropdown1" class="dropdown-content">
+
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            
+            {% if user.is_authenticated %}
+
+           
+            <li><a href="{% url 'decks_index'%}">Card Library</a></li>
+            <li><a href="{% url 'logout' %}">LogOut</a></li>
+           
+            {% else %}
+
+            <li><a href="{% url 'login' %}">Log In</a></li>
+            <li><a href="{% url 'signup' %}">SignUp</a></li>
+           
+            {% endif %}
+
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main class="container">
+    {% block content %} 
+    {% endblock %}
+    </main>
+    <footer class="page-footer" id="navigatorBar">
+      <div class="right">
+        All Rights Reserved, &copy; 2021 Card Collector &nbsp;
+      </div>
+    </footer>
+  <script>
+  document.addEventListener('DOMContentLoaded', function (){
+    const elems = document.querySelectorAll('.dropdown-trigger');
+    M.Dropdown.init(elems);
+  })
+  </script>
+  </body>
+
+</html>
